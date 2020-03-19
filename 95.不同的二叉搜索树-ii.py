@@ -18,5 +18,23 @@ class Solution(object):
         :type n: int
         :rtype: List[TreeNode]
         """
+        def generate_trees(start,end):
+            if start > end:return [None,] 
+
+            result = []
+            for i in range(start,end+1):
+                left_tree = generate_trees(start,i-1)
+                right_tree = generate_trees(i+1,end)
+                
+                for l in left_tree:
+                    for r in right_tree:
+                        current = TreeNode(i)
+                        current.left = l
+                        current.right = r
+                        result.append(current)
+            return result
+        return generate_trees(1,n) if n else []  
+             
+            
 # @lc code=end
 

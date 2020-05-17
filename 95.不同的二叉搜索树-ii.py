@@ -19,6 +19,7 @@ class Solution(object):
         :rtype: List[TreeNode]
         """
         def generate_trees(start,end):
+            #此时没有数字，将null加入  
             if start > end:return [None,] 
 
             result = []

@@ -11,18 +11,26 @@ class Solution(object):
         :type nums: List[int]
         :type target: int
         :rtype: int
-        """
-        if not nums or len(nums)<3:
+        """ 
+        if not nums or len(nums) < 3:
             return 0
-        
-        minnum =  0
+        nums = sorted(nums)
+        result = float("inf")
         for i in range(len(nums)):
-            l = i
-            r = len(nums)-1
-            while l < r:
-                res = nums[i] + nums[l] + nums[r]
-                 minnum = min(abs(target-res),minnum)
-        
-        return minnum
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            left = i + 1
+            right = len(nums) - 1
+            while left < right:
+                res = nums[i] + nums[left] + nums[right]
+                if abs(result - target) > abs(res - target):
+                    result = res 
+                if res < target:
+                    left += 1
+                elif res > target:
+                    right -= 1
+                else:
+                    return target
+        return result
 # @lc code=end
 
